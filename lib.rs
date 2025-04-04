@@ -1,5 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 
+pub use self::nft_minting_machine::{NFTMintingMachine, Error};
+
 /// The `nft_minting_machine` module defines a smart contract for minting NFTs using an oracle
 /// token that tracks the current NFT index. The contract provides three primary actions:
 /// - `setup_oracle`: A one-time function (admin-only) to initialize the oracle state.
@@ -19,6 +21,18 @@ mod nft_minting_machine {
     pub struct Nft {
         token_name: String,
         owner: AccountId,
+    }
+
+    impl Nft {
+        /// Returns the token name of the NFT.
+        pub fn token_name(&self) -> &String {
+            &self.token_name
+        }
+
+        /// Returns the owner of the NFT.
+        pub fn owner(&self) -> &AccountId {
+            &self.owner
+        }
     }
 
     /// OracleData holds the current NFT counter.
